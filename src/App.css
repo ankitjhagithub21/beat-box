@@ -11,6 +11,9 @@ body {
   background: black !important;
   
 }
+.rhap_time {
+    color: white !important ;
+}   
 
 
 .rhap_progress-filled,
@@ -18,13 +21,13 @@ body {
   background-color: #1ed760 !important;
 }
 
-.rhap_main-controls-button {
+/* .rhap_main-controls-button {
   color: #1ed760 !important;
 }
 
 .rhap_button-clear.rhap_volume-button {
   color: #1ed760 !important;
-}
+} */
 
 .rhap_volume-bar,
 .rhap_volume-indicator {

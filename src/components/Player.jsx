@@ -7,13 +7,14 @@ const Player = ({src,onNextButtonClick,onPrevButtonClick,onSongEnd}) => {
   return (
     <div className='fixed bottom-0 w-full z-50'>
          <AudioPlayer
-         
-         autoPlay={true}
+         autoPlayAfterSrcChange={true}
          src={url}
          onClickNext={onNextButtonClick}
          onClickPrevious={onPrevButtonClick}
          showSkipControls={true}
          showJumpControls={false}
+       
+        
          onEnded={onSongEnd}
       />
     </div>
