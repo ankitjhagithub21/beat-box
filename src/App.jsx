@@ -51,7 +51,7 @@ const App = () => {
   return (
     <main className="w-full h-screen relative flex items-center justify-center">
       <Navbar/>
-      <div className="max-w-6xl p-5 mx-auto">
+      <div className="max-w-6xl p-5 mx-auto ">
         {loading ? (
           <div className="grid lg:grid-cols-6 grid-cols-3 justify-items-center">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num, index) => {
