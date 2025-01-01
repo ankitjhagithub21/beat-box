@@ -2,14 +2,48 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { MdDownload } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const SongDetails = () => {
   const { songs, songIndex } = useSelector((state) => state.song);
   const currSong = songs[songIndex];
-  console.log(currSong);
   if (!currSong) {
     return <Navigate to={"/"} />;
   }
+  
+  const len = currSong.downloadUrl.length-1 || 0;
+  const src =  currSong.downloadUrl[len].url
+
+  const handleDownload = async () => {
+    const toastId = toast.loading("Song Downloading...")
+    try {
+      const response = await fetch(src);
+      const blob = await response.blob();
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `${currSong.name}.mp3`;
+
+      // Append the link to the document
+      document.body.appendChild(link);
+
+      // Trigger a click event on the link
+      link.click();
+
+      // Remove the link from the document
+      document.body.removeChild(link);
+      
+      toast.success("Song downloaded.")
+    } catch (error) {
+     
+      toast.error('Error downloading the file:', error);
+    }finally{
+      toast.dismiss(toastId)
+    }
+  };
+
+  
   return (
     <div className="max-w-6xl p-5 mx-auto">
       <div className="flex flex-wrap">
@@ -24,7 +58,7 @@ const SongDetails = () => {
           <h1 className="text-3xl mb-2">{currSong.name}</h1>
           <p>Year : {currSong.year}</p>
           <div className="flex  items-center mt-5 gap-5">
-            <button className="flex items-center gap-1 text-sm bg-green-600 hover:bg-green-700 rounded-full px-3 py-1.5">
+            <button onClick={handleDownload} className="flex items-center gap-1 text-sm bg-green-600 hover:bg-green-700 rounded-full px-3 py-1.5">
               Download Song <MdDownload />
             </button>
             <button className="border flex items-center gap-2 px-3 rounded-full py-1 text-sm">
@@ -34,11 +68,11 @@ const SongDetails = () => {
         </div>
         <div>
           <h1 className="text-2xl my-5">Song Artists</h1>
-          <div className="flex gap-3">
+          <div className="flex gap-5 flex-wrap">
             {currSong.artists.primary.map((artist) => {
               return (
                 <div
-                  className="flex flex-col gap-1 text-center items-center  cursor-pointer hover:scale-105"
+                  className="flex flex-col gap-1 text-center items-center "
                   key={artist.id}
                 >
                   {artist.image[2]?.url && (
