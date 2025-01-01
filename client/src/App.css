@@ -33,3 +33,6 @@ body {
 .rhap_volume-indicator {
   background-color: #1ed760 !important;
 }
+::-webkit-scrollbar{
+  display: none;
+}

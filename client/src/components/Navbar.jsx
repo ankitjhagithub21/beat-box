@@ -1,13 +1,13 @@
-import React from 'react'
+import {NavLink} from 'react-router-dom'
 import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
   return (
     <nav className='w-full fixed top-0 p-5 z-50  bg-black border-b flex items-center justify-between'>
-        <div className='md:flex hidden  items-center gap-1'>
-            <img src="/vite.svg" alt="" />
+        <NavLink to="/" className='md:flex hidden  items-center gap-1'>
+            <img src="/vite.svg" alt="logo" />
             <span className='text-white font-serif text-xl '>BeatBox</span>
-        </div>
+        </NavLink>
         <div className='flex items-center p-2 gap-2 rounded-full bg-[#2A2A2A] border max-w-md w-full'>
         <CiSearch size={25} />
             <input type="text" placeholder='Search songs...' className='bg-transparent w-full'/>

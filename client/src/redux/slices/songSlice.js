@@ -6,7 +6,7 @@ export const songSlice = createSlice({
     loading: true,
     songIndex: 0,
     pageNumber: 1,
-    query:"latest",
+    query:"hindi",
     songs:[],
   },
   reducers: {
@@ -18,6 +18,7 @@ export const songSlice = createSlice({
     },
     setPageNumber: (state, action) => {
       state.pageNumber = action.payload;
+      state.songIndex = 0;
     },
     setQuery: (state, action) => {
       state.query = action.payload;

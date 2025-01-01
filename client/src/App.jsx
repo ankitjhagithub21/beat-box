@@ -9,15 +9,17 @@ const App = () => {
   
 
   return (
-    <main className="w-full h-screen relative flex items-center justify-center">
-      <Navbar />
+    <main className="w-full min-h-screen relative flex items-center justify-center overflow-y-scroll py-24">
+    
       <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/song/:name" element={<SongDetails/>}/>
       </Routes>
+      <Player/>
       </BrowserRouter>
-      <Player/> 
+     
       
     </main>
   );
