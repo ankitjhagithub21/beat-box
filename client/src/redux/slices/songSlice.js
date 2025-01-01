@@ -22,6 +22,7 @@ export const songSlice = createSlice({
     },
     setQuery: (state, action) => {
       state.query = action.payload;
+      state.songIndex = 0;
     },
     setSongs: (state, action) => {
       state.songs = action.payload;

@@ -21,7 +21,7 @@ const useFetchSongs = () => {
         }
       };
       getAllSongs();
-    }, [pageNumber]);
+    }, [pageNumber,query]);
   
 }
 

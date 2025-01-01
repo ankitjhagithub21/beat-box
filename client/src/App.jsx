@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import { BrowserRouter, Routes,Route } from "react-router-dom";
 import { Toaster} from "react-hot-toast";
 import SongDetails from "./pages/SongDetails";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   
@@ -17,6 +19,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/song/:name" element={<SongDetails/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
       </Routes>
       <Player/>
       </BrowserRouter>
