@@ -1,0 +1,31 @@
+*{
+    outline: none !important;
+}
+body {
+  background-color: #000000;
+  
+}
+
+.rhap_container {
+  background: black !important;
+  
+}
+
+
+.rhap_progress-filled,
+.rhap_progress-indicator {
+  background-color: #1ed760 !important;
+}
+
+.rhap_main-controls-button {
+  color: #1ed760 !important;
+}
+
+.rhap_button-clear.rhap_volume-button {
+  color: #1ed760 !important;
+}
+
+.rhap_volume-bar,
+.rhap_volume-indicator {
+  background-color: #1ed760 !important;
+}
