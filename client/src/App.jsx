@@ -11,7 +11,7 @@ import useFetchUser from "./hooks/useFetchUser";
 
 const App = () => {
   
-useFetchUser()
+  useFetchUser()
 
   return (
     <main className="w-full min-h-screen relative flex items-center justify-center overflow-y-scroll py-24">
