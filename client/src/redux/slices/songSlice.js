@@ -4,7 +4,7 @@ export const songSlice = createSlice({
   name: "song",
   initialState: {
     loading: true,
-    songIndex: 0,
+    songIndex: null,
     pageNumber: 1,
     query:"hindi",
     songs:[],

@@ -5,6 +5,7 @@ import { setLoading,setSongs } from "../redux/slices/songSlice";
 const useFetchSongs = () => {
     const dispatch = useDispatch()
     const {query,pageNumber} = useSelector((state)=>state.song)
+    
     const apiUrl = `https://saavn.dev/api/search/songs?query=${query}&page=${pageNumber}`;
     
     useEffect(() => {

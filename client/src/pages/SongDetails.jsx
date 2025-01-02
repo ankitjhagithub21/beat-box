@@ -22,7 +22,7 @@ const SongDetails = () => {
 
       // Create a temporary link element
       const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
+      link.href = URL.createObjectURL(blob);
       link.download = `${currSong.name}.mp3`;
 
       // Append the link to the document

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const isAuthenticated = (req, res, next) => {
   try {
+
     const token = req.cookies.token;
 
     if (!token) {
@@ -11,10 +12,10 @@ const isAuthenticated = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SEC);
 
     if (!decoded) {
-      return res.status(401).json({ success: false, message: "Unautorized." });
+      return res.status(401).json({ success: false, message: "Unauthorized." });
     }
 
-    req.userId = decoded._id;
+    req.userId = decoded.id;
     next();
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
