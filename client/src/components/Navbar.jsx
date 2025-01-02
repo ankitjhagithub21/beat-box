@@ -27,7 +27,7 @@ const Navbar = () => {
   };
   return (
     <nav className="w-full fixed top-0 p-5 z-50  bg-black border-b flex items-center justify-between gap-5">
-      <NavLink to="/" className="md:flex hidden items-center gap-1">
+      <NavLink to="/" className=" flex items-center gap-1">
         <img src="/vite.svg" alt="logo" />
         <span className="text-white font-serif text-xl ">BeatBox</span>
       </NavLink>

@@ -18,7 +18,7 @@ const SearchBar = () => {
 
     }
   return (
-    <form onSubmit={handleSubmit} className='flex items-center p-2 gap-2 rounded-full bg-[#2A2A2A] border max-w-md w-full'>
+    <form onSubmit={handleSubmit} className='md:flex hidden items-center p-2 gap-2 rounded-full bg-[#2A2A2A] border max-w-md w-full'>
     <CiSearch size={25} />
         <input type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder='Search songs...' className='bg-transparent w-full'/>
     </form>
