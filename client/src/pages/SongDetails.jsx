@@ -47,7 +47,7 @@ const SongDetails = () => {
 
   const handleAddToFav = async() =>{
       
-    console.log(currSong)
+   
       try{
         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/user/add-song`,{
           method:"POST",

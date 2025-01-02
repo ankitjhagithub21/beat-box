@@ -8,7 +8,7 @@ const useFetchSongs = () => {
 
   const apiUrl = `https://saavn.dev/api/search/songs?query=${query}&page=${pageNumber}`;
 
-  const getAllSongs = useCallback(async () => {
+  const getAllSongs = async () => {
     if (!query) return; // Avoid fetching if query is empty
 
     dispatch(setLoading(true));
@@ -16,7 +16,6 @@ const useFetchSongs = () => {
       const res = await fetch(apiUrl);
       const { data } = await res.json();
 
-      
       const songData = data.results.map((song) => {
         return {
           id: song.id,
@@ -30,21 +29,17 @@ const useFetchSongs = () => {
         };
       });
 
-
-        dispatch(setSongs(songData));
-      
+      dispatch(setSongs(songData));
     } catch (error) {
       console.error("Error fetching songs:", error);
     } finally {
       dispatch(setLoading(false));
     }
-  }, [pageNumber, query]);
+  };
 
   useEffect(() => {
     getAllSongs();
-  }, [getAllSongs]);
-
-  return null; 
+  }, [pageNumber, query]);
 };
 
 export default useFetchSongs;

@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   useFetchSongs()
-  
   const {songs,loading,pageNumber} = useSelector(state=>state.song)
-  console.log(songs)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const onSongClick = (idx,name) => {
