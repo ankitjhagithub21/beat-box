@@ -7,9 +7,11 @@ import { Toaster} from "react-hot-toast";
 import SongDetails from "./pages/SongDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import useFetchUser from "./hooks/useFetchUser";
 
 const App = () => {
   
+useFetchUser()
 
   return (
     <main className="w-full min-h-screen relative flex items-center justify-center overflow-y-scroll py-24">
