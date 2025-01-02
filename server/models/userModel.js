@@ -18,6 +18,10 @@ const userSchema =  new mongoose.Schema({
         trim:true,
 
              
+    },
+    profileImg:{
+        type:String,
+        
     }
 })
 
