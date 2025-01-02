@@ -23,9 +23,7 @@ const useFetchUser = () => {
       } catch (error) {
         console.log(error);
         dispatch(setUser(null));
-      } finally {
-        dispatch(setLoading(false));
-      }
+      } 
     };
    if(!user){
     getUser();

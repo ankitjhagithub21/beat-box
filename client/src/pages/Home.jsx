@@ -8,7 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   useFetchSongs()
+  
   const {songs,loading,pageNumber} = useSelector(state=>state.song)
+  console.log(songs)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const onSongClick = (idx,name) => {
@@ -28,7 +30,7 @@ const Home = () => {
               <div key={song.id} onClick={() => onSongClick(idx,song.name)}>
                 <div className="relative">
                   <img
-                    src={song.image[1].url}
+                    src={song.image}
                     alt={song.name}
                     className="rounded-lg border cursor-pointer w-full"
                   />

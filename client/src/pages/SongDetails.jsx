@@ -15,13 +15,11 @@ const SongDetails = () => {
     return <Navigate to={"/"} />;
   }
   
-  const len = currSong.downloadUrl.length-1 || 0;
-  const src =  currSong.downloadUrl[len].url
 
   const handleDownload = async () => {
     const toastId = toast.loading("Song Downloading...")
     try {
-      const response = await fetch(src);
+      const response = await fetch(currSong.downloadUrl);
       const blob = await response.blob();
 
       // Create a temporary link element
@@ -48,13 +46,8 @@ const SongDetails = () => {
   };
 
   const handleAddToFav = async() =>{
-      const songData = {
-        id:currSong.id,
-        name:currSong.name,
-        url:src,
-        image:currSong.image[2].url
-      }
-
+      
+    console.log(currSong)
       try{
         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/user/add-song`,{
           method:"POST",
@@ -62,7 +55,7 @@ const SongDetails = () => {
             "Content-Type":"application/json"
           },
           credentials:"include",
-          body:JSON.stringify(songData)
+          body:JSON.stringify({song:currSong})
         })
 
         const data = await res.json();
@@ -83,7 +76,7 @@ const SongDetails = () => {
       <div className="flex flex-wrap">
         <div className="lg:w-1/4 w-full">
           <img
-            src={currSong?.image[2].url}
+            src={currSong.image}
             alt={currSong.name}
             className="rounded-lg border"
           />
@@ -103,7 +96,7 @@ const SongDetails = () => {
         <div>
           <h1 className="text-2xl my-5">Song Artists</h1>
           <div className="flex gap-5 flex-wrap">
-            {currSong.artists.primary.map((artist) => {
+            {currSong.artists.map((artist) => {
               return (
                 <div
                   className="flex flex-col gap-1 text-center items-center "

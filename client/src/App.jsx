@@ -9,11 +9,39 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import useFetchUser from "./hooks/useFetchUser";
 import Profile from "./pages/Profile";
+import { useDispatch, useSelector } from "react-redux";
+import { setPageNumber, setSongIndex } from "./redux/slices/songSlice";
+
 
 const App = () => {
   
   useFetchUser()
+   
+  const {songs,songIndex,pageNumber} = useSelector(state=>state.song)
 
+  const dispatch = useDispatch()
+
+  const onClickPrev = () => {
+     if (songIndex >= 1) {
+      dispatch(setSongIndex(songIndex - 1));
+     }
+   };
+ 
+ 
+   const onClickNext = () => {
+     if (songIndex < songs.length - 1) {
+      dispatch(setSongIndex(songIndex + 1))
+     } else {
+      dispatch(setPageNumber(pageNumber+1))
+ 
+     }
+   };
+   const onSongEnd = () => {
+     onClickNext();
+   };
+
+   
+  
   return (
     <main className="w-full min-h-screen relative flex items-center justify-center overflow-y-scroll py-24">
      <Toaster/>
@@ -26,7 +54,12 @@ const App = () => {
         <Route path="/register" element={<Register/>}/>
         <Route path="/profile" element={<Profile/>}/>
       </Routes>
-      <Player/>
+      <Player 
+      src={songs[songIndex].downloadUrl}
+      onClickNext={onClickNext}
+      onClickPrev={onClickPrev}
+      onSongEnd={onSongEnd}
+      />
       </BrowserRouter>
      
       

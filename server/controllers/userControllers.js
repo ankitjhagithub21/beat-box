@@ -174,27 +174,18 @@ const logout = async (req, res) => {
 
 const addSong = async(req,res) =>{
     try{
-      const {id,name,url,image} = req.body;
-
-      if(!id || !name || !url || !image){
-        return res.status(400).json({success:false,message:"All fields are required."})
-      }
-
+      const {song} = req.body;
+      
       const user = await User.findById(req.userId);
 
       if(!user){
         return res.status(404).json({success:false,message:"User not found."})
       }
 
-      const songIndex = user.songs.findIndex((song)=>song.id == id);
+      const songIndex = user.songs.findIndex((s)=>s.id == song.id);
       
       if(songIndex ==-1){
-        const song = {
-          id,
-          name,
-          url,
-          image
-        }
+      
         user.songs.push(song)
 
         await user.save();
