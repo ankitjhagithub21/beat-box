@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { setUser } from "../redux/slices/userSlice";
@@ -105,6 +105,7 @@ const Register = () => {
         <button className="mt-5 text-center p-3 bg-green-600 text-gray-800 font-bold hover:bg-green-700 rounded-full w-full">
           {loading ? "Loading..." : "Create Account"}
         </button>
+        <p className="mt-5  text-sm text-center">Already have an account ? <Link to={"/login"} className="underline text-green-500">Login here</Link></p>
       </form>
     </div>
   );

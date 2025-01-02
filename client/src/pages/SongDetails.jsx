@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { MdDownload } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { setUser } from "../redux/slices/userSlice";
 
 const SongDetails = () => {
   const { songs, songIndex } = useSelector((state) => state.song);
+  const {user} = useSelector(state=>state.user)
+  const dispatch = useDispatch()
+
   const currSong = songs[songIndex];
   if (!currSong) {
     return <Navigate to={"/"} />;
@@ -43,6 +47,36 @@ const SongDetails = () => {
     }
   };
 
+  const handleAddToFav = async() =>{
+      const songData = {
+        id:currSong.id,
+        name:currSong.name,
+        url:src,
+        image:currSong.image[2].url
+      }
+
+      try{
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/user/add-song`,{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          credentials:"include",
+          body:JSON.stringify(songData)
+        })
+
+        const data = await res.json();
+        if(data.success){
+          dispatch(setUser({...user,songs:data.songs}))        
+          toast.success(data.message)
+        }else{
+          toast.error(data.message)
+        }
+      }catch(error){
+        console.log(error)
+      }
+  }
+
   
   return (
     <div className="max-w-6xl p-5 mx-auto">
@@ -61,7 +95,7 @@ const SongDetails = () => {
             <button onClick={handleDownload} className="flex items-center gap-1 text-sm bg-green-600 hover:bg-green-700 rounded-full px-3 py-1.5">
               Download Song <MdDownload />
             </button>
-            <button className="border flex items-center gap-2 px-3 rounded-full py-1 text-sm">
+            <button className="border flex items-center gap-2 px-3 rounded-full py-1 text-sm" onClick={handleAddToFav}>
               Add To Favourite <FaHeart />{" "}
             </button>
           </div>

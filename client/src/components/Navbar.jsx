@@ -45,14 +45,16 @@ const Navbar = () => {
           {isOpen && (
             <div className="bg-white text-gray-800 flex flex-col gap-3 p-3 rounded-lg mt-1 absolute right-5">
               <NavLink
-                to={"/"}
+                to={"/profile"}
                 className="py-2 px-4 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                onClick={()=>setIsOpen(false)}
               >
                 Your Profile
               </NavLink>
               <button
                 className="py-2 px-4 hover:bg-green-600 rounded-lg bg-green-500"
                 onClick={handleLogout}
+
               >
                 Logout
               </button>

@@ -133,6 +133,7 @@ const login = async (req, res) => {
           fullName: loggedInUser.fullName,
           email: loggedInUser.email,
           profileImg: loggedInUser.profileImg,
+          songs:loggedInUser.songs
         },
       });
   } catch (error) {
@@ -171,9 +172,53 @@ const logout = async (req, res) => {
   }
 };
 
+const addSong = async(req,res) =>{
+    try{
+      const {id,name,url,image} = req.body;
+
+      if(!id || !name || !url || !image){
+        return res.status(400).json({success:false,message:"All fields are required."})
+      }
+
+      const user = await User.findById(req.userId);
+
+      if(!user){
+        return res.status(404).json({success:false,message:"User not found."})
+      }
+
+      const songIndex = user.songs.findIndex((song)=>song.id == id);
+      
+      if(songIndex ==-1){
+        const song = {
+          id,
+          name,
+          url,
+          image
+        }
+        user.songs.push(song)
+
+        await user.save();
+        res.status(200).json({success:true,message:"Song added to favourite.",songs:user.songs})
+
+      }else{
+        user.songs.splice(songIndex,1);
+        await user.save();
+        res.status(200).json({success:true,message:"Song removed from favourite."})
+      }
+     
+
+      
+      
+      
+    }catch(error){
+      return res.status(500).json({success:false,message:error.message})
+    }
+}
+
 module.exports = {
   register,
   login,
   getUser,
   logout,
+  addSong
 };

@@ -8,6 +8,7 @@ import SongDetails from "./pages/SongDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import useFetchUser from "./hooks/useFetchUser";
+import Profile from "./pages/Profile";
 
 const App = () => {
   
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/song/:name" element={<SongDetails/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
       <Player/>
       </BrowserRouter>
