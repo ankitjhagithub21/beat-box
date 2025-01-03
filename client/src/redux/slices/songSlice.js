@@ -8,7 +8,7 @@ export const songSlice = createSlice({
     pageNumber: 1,
     query:"hindi",
     songs:[],
-    src:"",
+    currSong:null,
   },
   reducers: {
     setLoading: (state, action) => {
@@ -28,12 +28,12 @@ export const songSlice = createSlice({
     setSongs: (state, action) => {
       state.songs = action.payload;
     },
-    setSrc:(state,action) =>{
-      state.src = action.payload
+    setCurrSong:(state,action) =>{
+      state.currSong = action.payload
     }
   },
 });
 
-export const { setLoading, setSongIndex ,setPageNumber,setQuery,setSongs,setSrc} = songSlice.actions;
+export const { setLoading, setSongIndex ,setPageNumber,setQuery,setSongs,setCurrSong} = songSlice.actions;
 
 export default songSlice.reducer;

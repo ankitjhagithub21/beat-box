@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { MdDownload } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { setUser } from "../redux/slices/userSlice";
+import { setQuery } from "../redux/slices/songSlice";
 
 const SongDetails = () => {
-  const { songs, songIndex } = useSelector((state) => state.song);
+  const { currSong } = useSelector((state) => state.song);
   const {user} = useSelector(state=>state.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const currSong = songs[songIndex];
+  
   if (!currSong) {
     return <Navigate to={"/"} />;
   }
@@ -46,8 +48,8 @@ const SongDetails = () => {
   };
 
   const handleAddToFav = async() =>{
-      
-   
+       
+    if(!user) return toast.error("You are not logged in.")
       try{
         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/user/add-song`,{
           method:"POST",
@@ -99,8 +101,12 @@ const SongDetails = () => {
             {currSong.artists.map((artist) => {
               return (
                 <div
-                  className="flex flex-col gap-1 text-center items-center "
+                  className="flex flex-col gap-1 text-center items-center cursor-pointer hover:scale-105"
                   key={artist.id}
+                  onClick={()=>{
+                    dispatch(setQuery(artist.name))
+                    navigate("/")
+                  }}
                 >
                   {artist.image[2]?.url && (
                     <>

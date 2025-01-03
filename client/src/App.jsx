@@ -10,7 +10,7 @@ import Register from "./pages/Register";
 import useFetchUser from "./hooks/useFetchUser";
 import Profile from "./pages/Profile";
 import { useDispatch, useSelector } from "react-redux";
-import { setPageNumber, setSongIndex } from "./redux/slices/songSlice";
+import { setCurrSong, setPageNumber, setSongIndex } from "./redux/slices/songSlice";
 
 const App = () => {
   useFetchUser();
@@ -23,6 +23,8 @@ const App = () => {
     if (songIndex >= 1) {
       dispatch(setSongIndex(songIndex - 1));
     }
+    dispatch(setCurrSong(songs[songIndex]))
+
   };
 
   const onClickNext = () => {
@@ -31,6 +33,7 @@ const App = () => {
     } else {
       dispatch(setPageNumber(pageNumber + 1));
     }
+    dispatch(setCurrSong(songs[songIndex]))
   };
   const onSongEnd = () => {
     onClickNext();
